@@ -1,0 +1,10 @@
+<h2>Books List</h2>
+<mat-list>
+  <mat-list-item *ngFor="let book of books">
+    <div style="flex: 1">
+      {{book.title}} - {{book.author}}
+    </div>
+    <button mat-button color="accent" (click)="editBook(book.uid)">Edit</button>
+    <button mat-button color="warn" (click)="deleteBook(book.uid)">Delete</button>
+  </mat-list-item>
+</mat-list>

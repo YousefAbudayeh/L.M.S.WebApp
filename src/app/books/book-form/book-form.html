@@ -1,0 +1,19 @@
+<h2>Create Book</h2>
+<form (ngSubmit)="createBook()">
+  <mat-form-field appearance="fill" style="width: 100%">
+    <mat-label>Title</mat-label>
+    <input matInput [(ngModel)]="title" name="title" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" style="width: 100%">
+    <mat-label>Author</mat-label>
+    <input matInput [(ngModel)]="author" name="author" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" style="width: 100%">
+    <mat-label>Description</mat-label>
+    <textarea matInput [(ngModel)]="description" name="description"></textarea>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">Create</button>
+</form>
