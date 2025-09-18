@@ -24,7 +24,7 @@ export class BookForm {
   createBook() {
     const body = { title: this.title, author: this.author, description: this.description, categoryUids: [] };
 
-    this.http.post('https://localhost:44329/api/Books', body).subscribe({
+    this.http.post('http://localhost:5195/api/Books', body).subscribe({
       next: () => {
         alert('Book created successfully!');
         this.router.navigate(['/books']);
