@@ -1,19 +1,21 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { MatListModule } from '@angular/material/list';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon'; 
+import { MatTableModule } from '@angular/material/table';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-book-list',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, MatListModule, MatButtonModule],
+  imports: [CommonModule, HttpClientModule, MatButtonModule, MatIconModule, MatTableModule],
   templateUrl: './book-list.html',
   styleUrls: ['./book-list.css']
 })
 export class BookList {
   books: any[] = [];
+  displayedColumns: string[] = ['title', 'author', 'actions'];
 
   constructor(private http: HttpClient, private router: Router) {
     this.loadBooks();
@@ -32,7 +34,6 @@ export class BookList {
 
   deleteBook(id: string) {
     if (!confirm('Are you sure?')) return;
-
     this.http.delete(`https://localhost:44329/api/Books/${id}`).subscribe({
       next: () => this.loadBooks(),
       error: (err) => console.error(err)

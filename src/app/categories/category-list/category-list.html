@@ -1,1 +1,33 @@
-<p>category-list works!</p>
+<div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+  <h2>Categories List</h2>
+  <button mat-raised-button color="primary" routerLink="/categories/create">
+    <mat-icon>add</mat-icon>
+    Create Category
+  </button>
+</div>
+
+<table mat-table [dataSource]="categories" class="mat-elevation-z8" style="width: 100%;">
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let category"> {{category.name}} </td>
+  </ng-container>
+
+  <!-- Actions Column -->
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Actions </th>
+    <td mat-cell *matCellDef="let category">
+      <button mat-button color="accent" (click)="editCategory(category.uid)">
+        <mat-icon>edit</mat-icon>
+        Edit
+      </button>
+      <button mat-button color="warn" (click)="deleteCategory(category.uid)">
+        <mat-icon>delete</mat-icon>
+        Delete
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

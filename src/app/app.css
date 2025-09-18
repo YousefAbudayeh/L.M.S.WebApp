@@ -3,6 +3,28 @@
 }
 
 .custom-toolbar {
-  background-color: #3B82F6 !important;
-  color: white !important;
+  background-color: #3B82F6;  /* Tailwind Blue-500 */
+  color: white;
+}
+
+.custom-button {
+  background-color: #2563EB; /* Tailwind Blue-600 */
+  color: white;
+}
+
+.custom-toolbar button {
+  margin-left: 10px;
+}
+
+.home-container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.welcome-image {
+  width: 300px;
+  height: auto;
+  margin-top: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
