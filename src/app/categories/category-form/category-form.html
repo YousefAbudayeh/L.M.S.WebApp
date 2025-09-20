@@ -1,1 +1,23 @@
-<p>category-form works!</p>
+<h2>Create Category</h2>
+
+<form #categoryForm="ngForm" (ngSubmit)="CreateCategory(categoryForm)">
+  <mat-form-field appearance="fill" style="width: 100%">
+    <mat-label>Name</mat-label>
+    <input 
+      matInput 
+      [(ngModel)]="name" 
+      name="name" 
+      required 
+      minlength="3" 
+      #nameCtrl="ngModel">
+    
+    <mat-error *ngIf="nameCtrl.invalid && nameCtrl.touched">
+      <span *ngIf="nameCtrl.errors?.['required']">Name is required.</span>
+      <span *ngIf="nameCtrl.errors?.['minlength']">Name must be at least 3 characters.</span>
+    </mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="categoryForm.invalid">
+    Create
+  </button>
+</form>

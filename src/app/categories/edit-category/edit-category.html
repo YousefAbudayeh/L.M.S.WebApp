@@ -1,0 +1,11 @@
+<h2>Edit Category</h2>
+<form (ngSubmit)="EditCategory()">
+  <mat-form-field appearance="fill" style="width: 100%">
+    <mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="name" name="name" required>
+  </mat-form-field>
+
+<div style="margin-top: 20px;">
+  <button mat-raised-button color="primary" type="submit">Edit</button>
+</div>
+</form>
