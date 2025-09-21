@@ -5,6 +5,7 @@ import { CategoryList } from './categories/category-list/category-list';
 import { CategoryForm } from './categories/category-form/category-form';
 import { Home } from './home/home';
 import { EditBook } from './books/edit-book/edit-book';
+import { EditCategory } from './categories/edit-category/edit-category';
 
 export const routes: Routes = [
   { path: '', component: Home },
@@ -13,5 +14,5 @@ export const routes: Routes = [
   { path: 'books/edit/:id', component: EditBook },
   { path: 'categories', component: CategoryList },
   { path: 'categories/create', component: CategoryForm },
-  { path: 'categories/edit', component: CategoryForm },
+  { path: 'categories/edit/:id', component: EditCategory },
 ];

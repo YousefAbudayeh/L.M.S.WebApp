@@ -1,19 +1,42 @@
 <h2>Create Book</h2>
-<form (ngSubmit)="createBook()">
+<form #bookForm="ngForm" (ngSubmit)="createBook()" novalidate>
   <mat-form-field appearance="fill" style="width: 100%">
     <mat-label>Title</mat-label>
-    <input matInput [(ngModel)]="title" name="title" required>
+    <input matInput [(ngModel)]="title" name="title" required #titleModel="ngModel">
+    <mat-error *ngIf="titleModel.invalid && titleModel.touched">
+      Title is required
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="fill" style="width: 100%">
     <mat-label>Author</mat-label>
-    <input matInput [(ngModel)]="author" name="author" required>
+    <input matInput [(ngModel)]="author" name="author" required #authorModel="ngModel">
+    <mat-error *ngIf="authorModel.invalid && authorModel.touched">
+      Author is required
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="fill" style="width: 100%">
     <mat-label>Description</mat-label>
-    <textarea matInput [(ngModel)]="description" name="description"></textarea>
+    <textarea matInput [(ngModel)]="description" name="description" required #descModel="ngModel"></textarea>
+    <mat-error *ngIf="descModel.invalid && descModel.touched">
+      Description is required
+    </mat-error>
   </mat-form-field>
 
-  <button mat-raised-button color="primary" type="submit">Create</button>
+  <mat-form-field appearance="fill" style="width: 100%;">
+    <mat-label>Categories</mat-label>
+    <mat-select [(ngModel)]="selectedCategoryIds" name="categories" multiple required #catModel="ngModel">
+      <mat-option *ngFor="let category of categories" [value]="category.uid">
+        {{ category.name }}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="catModel.invalid && catModel.touched">
+      At least one category must be selected
+    </mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="bookForm.invalid">
+    Create
+  </button>
 </form>

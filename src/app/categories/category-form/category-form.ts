@@ -5,10 +5,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-category-form',
-  imports: [HttpClientModule, FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule],
+  imports: [HttpClientModule, FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, CommonModule],
   templateUrl: './category-form.html',
   styleUrl: './category-form.css'
 })

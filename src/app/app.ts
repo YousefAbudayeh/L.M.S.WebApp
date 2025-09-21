@@ -1,25 +1,24 @@
 import { Component, signal } from '@angular/core';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
-
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     CommonModule,
-    RouterModule,      
+    RouterModule,
     RouterOutlet,
     MatToolbarModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
   ],
   template: `
     <mat-toolbar class="custom-toolbar">
-      <span>L.M.S Web App</span>
+<span class="app-title" (click)="goHome()" style="cursor: pointer;">L.M.S Web App</span>
       <span style="flex: 1 1 auto"></span>
       <button mat-raised-button color="primary" routerLink="/books">
         <mat-icon>menu_book</mat-icon>
@@ -39,4 +38,8 @@ import { CommonModule } from '@angular/common';
 })
 export class App {
   protected readonly title = signal('L.M.S-WebApp');
+  constructor(private router: Router) { }
+  goHome() {
+    this.router.navigate(['/']);
+  }
 }

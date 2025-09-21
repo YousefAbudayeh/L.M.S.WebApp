@@ -25,7 +25,7 @@ export class BookList implements OnInit{
   }
 
   loadBooks() {
-    this.http.get<any[]>('http://localhost:5195/api/Books').subscribe((data: any) => {
+    this.http.get<any[]>('https://localhost:44329/api/Books').subscribe((data: any) => {
         this.books = data.data;
         console.log("ggg",data);
     });
@@ -43,7 +43,7 @@ export class BookList implements OnInit{
 
   deleteBook(id: string) {
     if (!confirm('Are you sure?')) return;
-    this.http.delete(`http://localhost:5195/api/Books/${id}`).subscribe({
+    this.http.delete(`https://localhost:44329/api/Books/${id}`).subscribe({
       next: () => this.loadBooks(),
       error: (err) => console.error(err)
     });

@@ -22,39 +22,65 @@ export class EditBook {
   title = '';
   author = '';
   description = '';
-    categories = [
+  categories = [
     { uid: '1', name: 'Fiction' },
     { uid: '2', name: 'Non-Fiction' },
     { uid: '3', name: 'Science' },
   ];
   selectedCategoryIds: string[] = [];
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) {}
+  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) { }
 
-   ngOnInit() {
+  ngOnInit() {
     console.log("reached!");
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id) {
-      this.http.get(`http://localhost:5195/api/Books/${this.id}`).subscribe((data: any) => {
+      this.http.get(`https://localhost:44329/api/Books/${this.id}`).subscribe((data: any) => {
         // this.books = data.data;
-         this.title = data.data.title;
-         this.author = data.data.author;
-         this.description = data.data.description;
-         this.categories = data.data.categories;
+        this.title = data.data.title;
+        this.author = data.data.author;
+        this.description = data.data.description;
+        this.categories = data.data.categoryDetails;
+        this.selectedCategoryIds = this.categories.map((category) => category.uid)
         console.log("edit in process", data);
-    });
+      });
     }
   }
 
- selectedCategoryId(){
+  selectedCategoryId() {
 
- }
+  }
 
   EditBook() {
-    console.log(this.id);
-    const body = { uid: this.id, title: this.title, author: this.author, description: this.description, categoryUids: [] };
+    if (!this.title || this.title.trim().length === 0) {
+      alert('Title is required.');
+      return;
+    }
 
-    this.http.put('http://localhost:5195/api/Books',body).subscribe({
+    if (!this.author || this.author.trim().length === 0) {
+      alert('Author is required.');
+      return;
+    }
+
+    if (!this.description || this.description.trim().length === 0) {
+      alert('Description is required.');
+      return;
+    }
+
+    if (!this.selectedCategoryIds || this.selectedCategoryIds.length === 0) {
+      alert('At least one category must be selected.');
+      return;
+    }
+
+    const body = {
+      uid: this.id,
+      title: this.title.trim(),
+      author: this.author.trim(),
+      description: this.description.trim(),
+      categoryUids: this.selectedCategoryIds
+    };
+
+    this.http.put('https://localhost:44329/api/Books', body).subscribe({
       next: () => {
         alert('Book edited successfully!');
         this.router.navigate(['/books']);
